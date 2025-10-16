@@ -20,9 +20,9 @@ async function bootstrap() {
     .setDescription('The test assignment API description')
     .build();
   const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('api', app, document);
+  SwaggerModule.setup('/api/docs', app, document);
 
-  const port = configService.getOrThrow<number>('PORT');
+  const port = parseInt(configService.getOrThrow<string>('PORT'), 10);
   const server = await app.listen(port);
 
   return server;

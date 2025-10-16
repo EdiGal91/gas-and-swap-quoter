@@ -1,10 +1,11 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { FeeData, JsonRpcProvider, formatUnits } from 'ethers';
 import { GasPrice } from './gas.types';
 
 @Injectable()
 export class GasService {
+  private readonly logger = new Logger(GasService.name);
   private readonly provider: JsonRpcProvider;
 
   constructor(private readonly configService: ConfigService) {
@@ -29,7 +30,7 @@ export class GasService {
 
       return result;
     } catch (error) {
-      console.error('Failed to get gas price:', error.message);
+      this.logger.error('Failed to get gas price:', error.message);
       throw new Error('Failed to get gas price');
     }
   }

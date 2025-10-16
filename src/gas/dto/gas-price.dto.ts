@@ -1,20 +1,20 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsString } from 'class-validator';
+import { IsEnum, IsNumberString } from 'class-validator';
 
 export class GasPriceResponseDto {
   @ApiProperty()
-  @IsString()
+  @IsNumberString()
   gasPrice: string;
 
   @ApiProperty()
-  @IsString()
+  @IsNumberString()
   maxFeePerGas: string;
 
   @ApiProperty()
-  @IsString()
+  @IsNumberString()
   maxPriorityFeePerGas: string;
 
   @ApiProperty({ example: 'gwei' })
-  @IsString()
+  @IsEnum(['gwei'])
   unit: string;
 }
