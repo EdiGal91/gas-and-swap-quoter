@@ -6,7 +6,6 @@ import {
   ApiResponse,
 } from '@nestjs/swagger';
 import { GasService } from './gas.service';
-import { GasPrice } from './gas.types';
 import { GasPriceResponseDto } from './dto/gas-price.dto';
 
 @Controller()
@@ -24,7 +23,7 @@ export class GasController {
     description: 'Internal Server Error.',
     type: HttpException,
   })
-  async getGas(): Promise<GasPrice> {
+  async getGas(): Promise<GasPriceResponseDto> {
     try {
       const gasPrice = await this.gasService.getGasPrice();
       return gasPrice;

@@ -1,7 +1,7 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { FeeData, JsonRpcProvider, formatUnits } from 'ethers';
-import { GasPrice } from './gas.types';
+import { GasPriceResponseDto } from './dto/gas-price.dto';
 
 @Injectable()
 export class GasService {
@@ -13,7 +13,7 @@ export class GasService {
     this.provider = new JsonRpcProvider(rpcUrl);
   }
 
-  async getGasPrice(): Promise<GasPrice> {
+  async getGasPrice(): Promise<GasPriceResponseDto> {
     try {
       const feeData: FeeData = await this.provider.getFeeData();
       const unit = 'gwei';
