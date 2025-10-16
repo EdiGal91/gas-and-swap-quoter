@@ -3,6 +3,7 @@ import { ConfigService } from '@nestjs/config';
 import { VersioningType } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { AppModule } from './app.module';
+import { LoggingInterceptor } from './common/interceptors/logging.interceptor';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -14,6 +15,8 @@ async function bootstrap() {
     prefix: 'v',
     defaultVersion: '1',
   });
+
+  app.useGlobalInterceptors(new LoggingInterceptor());
 
   const config = new DocumentBuilder()
     .setTitle('Test Assignment')
