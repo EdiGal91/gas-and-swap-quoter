@@ -1,13 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { FeeData, JsonRpcProvider, formatUnits } from 'ethers';
-
-export interface GasPrice {
-  gasPrice: string;
-  maxFeePerGas: string;
-  maxPriorityFeePerGas: string;
-  unit: string;
-}
+import { GasPrice } from './gas.types';
 
 @Injectable()
 export class GasService {
