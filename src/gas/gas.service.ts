@@ -34,6 +34,9 @@ export class GasService implements OnModuleInit, OnModuleDestroy {
     this.interval = setInterval(async () => {
       await this.refreshGasPriceCache();
     }, this.cacheRefreshInterval);
+    this.logger.log(
+      `Gas price cache refreshed every ${this.cacheRefreshInterval}ms`,
+    );
   }
 
   onModuleDestroy() {
