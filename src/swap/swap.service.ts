@@ -1,5 +1,6 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { UniswapService } from './uniswap.service';
+import { SwapResultResponseDto } from './dto/swap-result-response.dto';
 import { ZeroAddress } from 'ethers';
 
 @Injectable()
@@ -10,7 +11,7 @@ export class SwapService {
     fromTokenAddress: string,
     toTokenAddress: string,
     amountIn: string,
-  ) {
+  ): Promise<SwapResultResponseDto> {
     const pairAddress = await this.uniswapService.getPairAddress(
       fromTokenAddress,
       toTokenAddress,

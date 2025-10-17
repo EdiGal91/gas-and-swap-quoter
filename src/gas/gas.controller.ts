@@ -1,10 +1,5 @@
 import { Controller, Get, HttpException, HttpStatus } from '@nestjs/common';
-import {
-  ApiOperation,
-  ApiOkResponse,
-  ApiExpectationFailedResponse,
-  ApiResponse,
-} from '@nestjs/swagger';
+import { ApiOperation, ApiOkResponse, ApiResponse } from '@nestjs/swagger';
 import { GasService } from './gas.service';
 import { GasPriceResponseDto } from './dto/gas-price.dto';
 
