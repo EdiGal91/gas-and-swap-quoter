@@ -39,4 +39,22 @@ describe('GasController', () => {
   it('should be defined', () => {
     expect(controller).toBeDefined();
   });
+
+  it('should return gas price', async () => {
+    const result = await controller.getGas();
+    expect(result).toEqual({
+      gasPrice: '1',
+      maxFeePerGas: '1',
+      maxPriorityFeePerGas: '1',
+      unit: 'gwei',
+    });
+  });
+
+  it('should throw an error if service throws an error', async () => {
+    const errorMessage = 'Test error';
+    jest
+      .spyOn(controller['gasService'], 'getGasPrice')
+      .mockRejectedValue(new Error(errorMessage));
+    await expect(controller.getGas()).rejects.toThrow(errorMessage);
+  });
 });
