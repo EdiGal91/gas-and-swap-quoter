@@ -1,5 +1,6 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { UniswapService } from './uniswap.service';
+import { ZeroAddress } from 'ethers';
 
 @Injectable()
 export class SwapService {
@@ -14,6 +15,9 @@ export class SwapService {
       fromTokenAddress,
       toTokenAddress,
     );
+    if (pairAddress === ZeroAddress) {
+      throw new BadRequestException('Pair not found');
+    }
     const { token0, reserve0, token1, reserve1 } =
       await this.uniswapService.getPairInfo(pairAddress);
 
