@@ -1,5 +1,4 @@
 import { Injectable } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
 import { CacheClient } from './cache.types';
 import { MemoryCacheClient } from './memory.client';
 
@@ -7,7 +6,7 @@ import { MemoryCacheClient } from './memory.client';
 export class CacheManager {
   private readonly client: CacheClient;
 
-  constructor(private readonly configService: ConfigService) {
+  constructor() {
     this.client = new MemoryCacheClient();
   }
 
@@ -15,7 +14,7 @@ export class CacheManager {
     return this.client.get(key);
   }
 
-  set(key: string, value: string, ttlSeconds?: number) {
-    return this.client.set(key, value, ttlSeconds);
+  set(key: string, value: string) {
+    return this.client.set(key, value);
   }
 }
