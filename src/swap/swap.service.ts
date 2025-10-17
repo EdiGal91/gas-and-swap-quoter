@@ -40,21 +40,9 @@ export class SwapService {
       throw new BadRequestException('Invalid token pair');
     }
 
-    /**
-     *
-     * reserveIn * reserveOut = K (constant)
-     * (reserveIn + amountIn) * (reserveOut - amountOut) = K
-     *
-     * (reserveIn + amountIn) * (reserveOut - amountOut) = reserveIn * reserveOut
-     * reserveIn * reserveOut - reserveIn * amountOut + amountIn * reserveOut - amountIn * amountOut = reserveIn * reserveOut
-     * - reserveIn * amountOut + amountIn * reserveOut - amountIn * amountOut = 0
-     * amountIn * reserveOut = reserveIn * amountOut + amountIn * amountOut
-     * amountIn * reserveOut = amountOut(reserveIn + amountIn)
-     * amountOut = (amountIn * reserveOut) / (reserveIn + amountIn)
-     */
-
     const amountOut =
-      (BigInt(amountIn) * reserveOut) / (reserveIn + BigInt(amountIn));
+      (BigInt(amountIn) * 997n * reserveOut) /
+      (reserveIn * 1000n + BigInt(amountIn) * 997n);
 
     return {
       fromTokenAddress,
