@@ -35,13 +35,13 @@ export class UniswapService {
     const pairContract = new Contract(pairAddress, PAIR_ABI, this.provider);
     const token0 = await pairContract.token0();
     const token1 = await pairContract.token1();
-    const reservces = await pairContract.getReserves();
+    const reserves = await pairContract.getReserves();
 
     return {
       token0,
-      reserve0: reservces.reserve0,
+      reserve0: reserves.reserve0,
       token1,
-      reserve1: reservces.reserve1,
+      reserve1: reserves.reserve1,
     };
   }
 }

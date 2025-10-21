@@ -7,6 +7,7 @@ import {
 } from '@nestjs/common';
 import { ApiOperation, ApiOkResponse, ApiResponse } from '@nestjs/swagger';
 import { EthAddressPipe } from '../common/pipes/eth-address.pipe';
+import { PositiveBigIntPipe } from '../common/pipes/positive-bigint.pipe';
 import { SwapService } from './swap.service';
 import { SwapResultResponseDto } from './dto/swap-result-response.dto';
 
@@ -28,7 +29,7 @@ export class SwapController {
   async swap(
     @Param('fromTokenAddress', EthAddressPipe) fromTokenAddress: string,
     @Param('toTokenAddress', EthAddressPipe) toTokenAddress: string,
-    @Param('amountIn') amountIn: string,
+    @Param('amountIn', PositiveBigIntPipe) amountIn: string,
   ): Promise<SwapResultResponseDto> {
     try {
       const result = await this.swapService.getSwapResult(
